@@ -10,9 +10,9 @@ templates:
         unit: 0
         file: /usr/share/OVMF/OVMF_CODE.fd
       - if: virtio
-        format: raw
+        format: qcow2
         unit: 0
-        file: balena.img
+        file: balena.qcow2
 #    net:
 #      - nic:
 #        model: virtio

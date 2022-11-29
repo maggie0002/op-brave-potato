@@ -28,3 +28,4 @@ guests:
   - template: standard
     arch: x86_64
     count: 1
+

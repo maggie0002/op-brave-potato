@@ -23,6 +23,7 @@ templates:
       - user:
         id: n0
         net: 10.5.0.0/24
+        host: 10.5.0.107
         dhcpstart: 10.5.0.1
     device:
       - virtio-net-pci: 
@@ -36,3 +37,6 @@ guests:
   - template: standard
     arch: x86_64
     count: 1
+
+    -device e1000,netdev=network0 -drive file=myVM.qcow2,format=qcow2 
+-machine pseries-2.12 -m 4G -netdev user,id=network0,net=192.168.1.0/24,host=192.168.1.107,dhcpstart=192.168.1.1 

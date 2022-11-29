@@ -1,13 +1,11 @@
-#!/usr/bin/env bash
-#set -e
+#!/usr/bin/env sh
+set -e
 
 mkdir -p /dev/net
 mknod -m 666 /dev/net/tun c 10 200
 
-brctl addbr br0
-ip addr add 10.0.0.1/16 dev br0 
-ip link set dev br0 up
+socat UDP4-DATAGRAM:230.0.0.1:1234,sourceport=1234,reuseaddr,ip-add-membership=230.0.0.1:127.0.0.1 TUN:10.0.3.1/24,tun-type=tap,iff-no-pi,iff-up,tun-name=vmvlan0 &
 
-dnsmasq --interface=br0 --dhcp-range="interface:br0,10.0.0.2,10.0.255.254,255.255.0.0" --port=0 --conf-file "" --bind-interfaces --no-daemon &
+dnsmasq --conf-file=dnsmasq.conf --leasefile-ro
 
 exec "$@"

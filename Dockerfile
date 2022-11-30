@@ -17,10 +17,12 @@ WORKDIR /app
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+    ca-certificates \
     dnsmasq \
     ovmf \
     qemu-system-aarch64 \
     qemu-system-x86 \
+    qemu-utils \
     socat \
     unzip \
     wget && \
@@ -38,6 +40,7 @@ RUN if [ $(uname -p) = "aarch64" ] ; then \
     qemu-img convert -f raw -O qcow2 balena.img balena-source.qcow2 && \
     rm balena.img
 
+# TODO: Remove when finished debugging
 # Install the Balena CLI. Useful for debugging
 RUN wget -O balena-cli.zip "https://github.com/balena-io/balena-cli/releases/download/v$CLI_VERSION/balena-cli-v$CLI_VERSION-linux-x64-standalone.zip" && \
     unzip balena-cli.zip && \

@@ -6,6 +6,17 @@ mem="512M"
 
 echo "Starting VM..."
 
+# Decompress any files passed in as images
+if [ -f img/*.zip ]; then
+    unzip -o *.zip
+fi
+
+# If user has provided another image file, use that instead of the default
+if [ -f img/*.img ]; then
+    qemu-img convert -f raw -O qcow2 img/*.img balena-source.qcow2
+    qemu-img create -f qcow2 -F qcow2 -b balena-source.qcow2 balena.qcow2 8G
+fi
+
 if [ "$arch" == "aarch64" ]
 then
     exec qemu-system-aarch64 \

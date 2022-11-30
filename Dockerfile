@@ -9,9 +9,10 @@ ARG GENERIC_AMD64_VERSION="2.105.2"
 ENV TZ=Etc/UTC
 ENV PATH /app/balena-cli:$PATH
 
+# Default settings. Can be overridden by passing the environment variables at run time. 
 ENV CORES="4"
 ENV DISK="8G"
-ENV MEM="512M"
+ENV MEM="1G"
 
 WORKDIR /app
 

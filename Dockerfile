@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
+
 ARG CLI_VERSION="14.5.2"
 ARG GENERIC_AARCH64_VERSION="2.107.13"
 ARG GENERIC_AMD64_VERSION="2.105.2"
@@ -8,10 +9,14 @@ ARG GENERIC_AMD64_VERSION="2.105.2"
 ENV TZ=Etc/UTC
 ENV PATH /app/balena-cli:$PATH
 
+ENV CORES="4"
+ENV DISK="8G"
+ENV MEM="512M"
+
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
     dnsmasq \
     ovmf \
     qemu-system-aarch64 \
@@ -31,9 +36,9 @@ RUN if [ $(uname -p) = "aarch64" ] ; then \
     rm balena.zip && \
     mv *.img balena.img && \
     qemu-img convert -f raw -O qcow2 balena.img balena-source.qcow2 && \
-    qemu-img create -f qcow2 -F qcow2 -b balena-source.qcow2 balena.qcow2 8G && \
     rm balena.img
 
+# Install the Balena CLI. Useful for debugging
 RUN wget -O balena-cli.zip "https://github.com/balena-io/balena-cli/releases/download/v$CLI_VERSION/balena-cli-v$CLI_VERSION-linux-x64-standalone.zip" && \
     unzip balena-cli.zip && \
     rm balena-cli.zip

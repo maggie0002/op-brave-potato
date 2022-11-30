@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-
 arch=$(uname -p)
-cores="4"
-mem="512M"
 
 echo "Starting VM..."
 
@@ -14,7 +11,11 @@ fi
 # If user has provided another image file, use that instead of the default
 if [ -f img/*.img ]; then
     qemu-img convert -f raw -O qcow2 img/*.img balena-source.qcow2
-    qemu-img create -f qcow2 -F qcow2 -b balena-source.qcow2 balena.qcow2 8G
+fi
+
+# If image is not yet generated
+if [ ! -f balena.qcow2 ]; then
+    qemu-img create -f qcow2 -F qcow2 -b balena-source.qcow2 balena.qcow2 "$DISK"
 fi
 
 if [ "$arch" == "aarch64" ]
@@ -23,8 +24,8 @@ then
         -nographic \
         -machine virt,highmem=off \
         -cpu cortex-a53 \
-        -smp "$cores" \
-        -m "$mem" \
+        -smp "$CORES" \
+        -m "$MEM" \
         -drive if=virtio,format=qcow2,unit=0,file=balena.qcow2 \
         -net nic,model=virtio,macaddr=52:54:00:b9:57:b8 \
         -net user \
@@ -38,8 +39,8 @@ then
     -nographic \
     -machine q35,accel=kvm \
     -cpu max \
-    -smp "$cores" \
-    -m "$mem" \
+    -smp "$CORES" \
+    -m "$MEM" \
     -drive if=pflash,format=raw,unit=0,file=/usr/share/OVMF/OVMF_CODE.fd \
     -drive if=virtio,format=qcow2,unit=0,file=balena.qcow2 \
     -net nic,model=virtio,macaddr=52:54:00:b9:57:b8 \

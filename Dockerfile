@@ -12,7 +12,6 @@ RUN apt-get update && \
     dnsmasq \
     ovmf \
     qemu-system-aarch64 \
-    qemu-system-arm \
     qemu-system-x86 \
     socat \
     unzip \
@@ -34,9 +33,10 @@ RUN wget -O balena-cli.zip "https://github.com/balena-io/balena-cli/releases/dow
 
 COPY dnsmasq.conf .
 COPY entrypoint.sh .
+COPY start.sh .
 
-RUN chmod +x entrypoint.sh
+RUN chmod +x entrypoint.sh start.sh
 
 ENTRYPOINT [ "/app/entrypoint.sh" ]
 
-CMD ["sleep", "infinity"]
+CMD ["/app/start.sh"]

@@ -5,7 +5,7 @@ Clone then build and start with:
 ```
 docker build -t bp .
 
-docker run -it --device=/dev/kvm --cap-add=net_admin bp bash
+docker run -it --device=/dev/kvm --cap-add=net_admin --network host bp
 
 node cli.js
 ```

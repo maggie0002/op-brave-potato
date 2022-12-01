@@ -10,9 +10,8 @@ ENV TZ=Etc/UTC
 ENV PATH /app/balena-cli:$PATH
 
 # Default settings. Can be overridden by passing the environment variables at run time. 
-ENV CORES="4"
 ENV DISK="8G"
-ENV MEM="1G"
+ENV MEM="512M"
 
 WORKDIR /app
 
@@ -41,7 +40,6 @@ RUN if [ $(uname -p) = "aarch64" ] ; then \
     qemu-img convert -f raw -O qcow2 balena.img balena-source.qcow2 && \
     rm balena.img
 
-# TODO: Remove when finished debugging
 # Install the Balena CLI. Useful for debugging
 RUN wget -O balena-cli.zip "https://github.com/balena-io/balena-cli/releases/download/v$CLI_VERSION/balena-cli-v$CLI_VERSION-linux-x64-standalone.zip" && \
     unzip balena-cli.zip && \

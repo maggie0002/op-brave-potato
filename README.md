@@ -19,7 +19,7 @@ Defaults:
 ```
 CORES=4
 DISK=8G
-MEM=1G
+MEM=512M
 ```
 
 At present, only one instance can be running at a time. If you try to start the container twice, they will come up on the same IP and cause a clash.

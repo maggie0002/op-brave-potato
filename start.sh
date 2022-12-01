@@ -8,9 +8,19 @@ if ! ls /dev/kvm &> /dev/null; then
     exit 1
 fi
 
-# Set default cores to same as system
+# Set default cores to same as system if not specified
 if [ ! -n "$CORES" ]; then
     CORES=$(nproc --all)
+fi
+
+# Set default space to same as available on system if not specified
+if [ ! -n "$DISK" ]; then
+    DISK=$(df -Ph . | tail -1 | awk '{print $4}')
+fi
+
+# Set default memory to same as system if not specified
+if [ ! -n "$MEM" ]; then
+    MEM=$(free -m | grep -oP '\d+' | head -n 1)M
 fi
 
 # Decompress any files passed in as images

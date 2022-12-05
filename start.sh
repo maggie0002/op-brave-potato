@@ -2,7 +2,7 @@
 ARCH=$(uname -p)
 RANDOM_PORT=$((RANDOM % 9999))
 
-# Enable hardware acceleration if available
+# Check for hardware acceleration
 if ! ls /dev/kvm &> /dev/null; then
     echo "KVM hardware acceleration unavailable. Pass --device /dev/kvm in your Docker run command."
     exit 1

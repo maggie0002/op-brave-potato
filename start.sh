@@ -43,9 +43,11 @@ fi
 
 if [ "$ARCH" == "aarch64" ]
 then
+    MACHINE="virt"
     QEMU="qemu-system-aarch64"
 elif [ "$ARCH" == "x86_64" ]
 then
+    MACHINE="q35"
     QEMU="qemu-system-x86_64"
 else
   echo "Architecture not supported."
@@ -57,7 +59,7 @@ echo "Starting BalenaVirt Machine..."
 # Start
 exec "$QEMU" \
     -nographic \
-    -machine q35 \
+    -machine "$MACHINE" \
     -accel kvm \
     -cpu max \
     -smp "$CORES" \

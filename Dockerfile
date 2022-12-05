@@ -15,11 +15,9 @@ RUN apt-get update && \
     unzip \
     wget
 
-# Install the Balena CLI. Useful for debugging
 RUN wget -O balena-cli.zip "https://github.com/balena-io/balena-cli/releases/download/v$CLI_VERSION/balena-cli-v$CLI_VERSION-linux-x64-standalone.zip" && \
     unzip balena-cli.zip
 
-# Fetch OS image and configure as qcow2
 RUN if [ $(uname -p) = "aarch64" ] ; then \
     wget -O balena.zip "https://api.balena-cloud.com/download?deviceType=generic-aarch64&version=$GENERIC_AARCH64_VERSION&fileType=.zip&developmentMode=true"; \
     else \

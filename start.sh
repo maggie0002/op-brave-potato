@@ -70,5 +70,5 @@ exec "$QEMU" \
     -net user \
     -netdev user,id=n0,hostfwd=tcp::1$RANDOM_PORT-:22,hostfwd=tcp::2$RANDOM_PORT-:2375 \
     -netdev socket,id=vlan,mcast=230.0.0.1:1234 \
-    -device virtio-net-pci,netdev=n0 \
-    -device virtio-net-pci,netdev=vlan
+    -device virtio-net-pci,netdev=n0,mac=52:54:00:b9:57:b8 \
+    -device virtio-net-pci,netdev=vlan,mac=52:54:00:b9:57:b8

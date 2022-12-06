@@ -50,7 +50,7 @@ RUN apt-get update && \
     socat && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=image-builder /app/balena-cli .
+COPY --from=image-builder /app/balena-cli balena-cli
 COPY --from=image-builder /app/balena-source.qcow2 .
 
 COPY dnsmasq.conf .

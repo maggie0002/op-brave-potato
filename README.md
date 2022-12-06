@@ -44,3 +44,7 @@ Other ports can me mapped locally, for example to interact with services on the 
 ```
 ssh -L 127.0.0.1:80:10.0.3.101:80 root@111.111.111.111
 ```
+
+## Install script
+
+sudo -v ; curl https://.../install.sh | sudo bash

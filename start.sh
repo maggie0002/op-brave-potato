@@ -20,7 +20,7 @@ fi
 
 # Set default memory to same as system if not specified
 if [ ! -n "$MEM" ]; then
-    MEM=$(free -m | grep -oP '\d+' | head -n 1)M
+    MEM=$[$(free -m | grep -oP '\d+' | head -6 | tail -1)-100]M
 fi
 
 # Decompress any files passed in as images

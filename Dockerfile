@@ -11,7 +11,7 @@ RUN apt-get update && \
 
 RUN wget -O balena-image.zip $IMAGE_URL && \
     unzip balena-image.zip && \
-    mv *.qcow2 balena.qcow2 && \
+    mv *.qcow2 balena-source.qcow2 && \
     rm balena-image.zip
 
 

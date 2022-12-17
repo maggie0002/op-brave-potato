@@ -19,19 +19,7 @@ fi
 
 # Set default memory to same as system if not specified
 if [ ! -n "$MEM" ]; then
-    MEM=$[$(free -m | grep -oP '\d+' | head -6 | tail -1)-100]M
-fi
-
-# Decompress any files passed in as images
-if [ -f img/*.zip ]; then
-    echo "Decompressing image files..."
-    unzip -o *.zip
-fi
-
-# If user has provided another image file, use that instead of the default
-if [ -f img/*.img ]; then
-    echo "Converting image to qcow2..."
-    qemu-img convert -f raw -O qcow2 img/*.img balena-source.qcow2
+    MEM=$[$(free -m | grep -oP '\d+' | head -6 | tail -1)-50]M
 fi
 
 # If image is not yet generated

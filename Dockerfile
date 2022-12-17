@@ -32,7 +32,7 @@ RUN apt-get update && \
     socat && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=extract-image balena.qcow2 .
+COPY --from=extract-image balena-source.qcow2 .
 COPY dnsmasq.conf .
 COPY entrypoint.sh .
 COPY start.sh .

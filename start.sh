@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-ARCH=$(uname -p)
 RANDOM_PORT=$((RANDOM % 9999))
 
 # Check for hardware acceleration
@@ -41,29 +40,17 @@ if [ ! -f balena.qcow2 ]; then
     qemu-img create -f qcow2 -F qcow2 -b balena-source.qcow2 balena.qcow2 "$DISK"
 fi
 
-if [ "$ARCH" == "aarch64" ]
-then
-    MACHINE="virt"
-    QEMU="qemu-system-aarch64"
-elif [ "$ARCH" == "x86_64" ]
-then
-    MACHINE="q35"
-    QEMU="qemu-system-x86_64"
-else
-  echo "Architecture not supported."
-  exit 1
-fi
-
 echo "Starting BalenaVirt Machine..."
 
 # Start
-exec "$QEMU" \
+exec qemu-system-x86_64 \
     -nographic \
-    -machine "$MACHINE" \
+    -machine q35 \
     -accel kvm \
     -cpu max \
     -smp "$CORES" \
     -m "$MEM" \
+    -bios "/usr/share/ovmf/OVMF.fd" \
     -drive if=pflash,format=raw,unit=0,file=/usr/share/OVMF/OVMF_CODE.fd \
     -drive if=virtio,format=qcow2,unit=0,file=balena.qcow2 \
     -net nic,model=virtio,macaddr=52:54:00:b9:57:b8 \

@@ -8,8 +8,6 @@ docker build -t bp .
 docker run -it --restart always --device=/dev/kvm --cap-add=net_admin --network host bp
 ```
 
-To use a custom image instead of the default, mount the image in `img/` inside the container (`.zip` files and `.img` files are both supported).
-
 Default cores, disk size and memory will mirror the system that it is running on (using available memory to avoid out of memory errors). Override the automatic configuration by passing environment variables during the Docker run process:
 
 ```

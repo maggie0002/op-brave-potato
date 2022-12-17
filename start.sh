@@ -22,7 +22,7 @@ if [ ! -n "$MEM" ]; then
     MEM=$[$(free -m | grep -oP '\d+' | head -6 | tail -1)-50]M
 fi
 
-# If image is not yet generated
+# If image is not yet generated then create based on available disk space
 if [ ! -f balena.qcow2 ]; then
     echo "Creating VM image..."
     qemu-img create -f qcow2 -F qcow2 -b balena-source.qcow2 balena.qcow2 "$DISK"

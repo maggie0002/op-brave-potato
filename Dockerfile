@@ -1,13 +1,16 @@
 FROM ubuntu:20.04 AS extract-image
 
+ARG IMAGE_URL="https://github.com/maggie0002/op-brave-potato/releases/download/0.0.3/generic_amd64_2.108.0.qcow2.zip"
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    unzip && \
+    ca-certificates \
+    unzip \
+    wget && \
     rm -rf /var/lib/apt/lists/*
 
-COPY img/*.zip balena-image.zip
-
-RUN unzip balena-image.zip && \
+RUN wget -O balena-image.zip $IMAGE_URL && \
+    unzip balena-image.zip && \
     mv *.qcow2 balena.qcow2 && \
     rm balena-image.zip
 

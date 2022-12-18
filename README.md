@@ -50,5 +50,5 @@ ssh -L 80:10.0.3.10:80 \
 ## Install script
 
 ```
-sudo -v ; curl https://raw.githubusercontent.com/maggie0002/op-brave-potato/main/install.sh | sudo bash
+sudo -v ; curl https://raw.githubusercontent.com/maggie0002/op-brave-potato/main/install.sh | sudo source
 ```

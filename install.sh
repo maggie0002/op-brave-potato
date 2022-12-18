@@ -7,12 +7,6 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
-# Setup and enable UFW
-sudo apt-get update
-sudo apt-get install ufw -y
-sudo ufw allow ssh
-echo "y" | sudo ufw enable
-
 # Install Docker
 curl -fsSL https://get.docker.com | sudo sh
 

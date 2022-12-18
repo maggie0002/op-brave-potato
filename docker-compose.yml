@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+  networking:
+    image: ghcr.io/maggie0002/balena-virt-networking:latest
+    cap_add:
+      - net_admin
+    devices:
+      - /dev/kvm
+    networks:
+      - host
+    restart: always
+
+  balena-virt:
+    image: ghcr.io/maggie0002/balena-virt:latest
+    cap_add:
+      - net_admin
+    devices:
+      - /dev/kvm
+    networks:
+      - host
+    restart: always

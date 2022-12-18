@@ -6,7 +6,7 @@ on:
       - "*.*.*"
 
 env:
-  GHCR_IMAGE_NAME: maggie0002/op-brave-potato
+  GHCR_IMAGE_NAME: maggie0002/balena-virt-networking
   REGISTRY: ghcr.io
 
 jobs:
@@ -50,7 +50,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: 
+          file: ./Dockerfile.networking
           platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}

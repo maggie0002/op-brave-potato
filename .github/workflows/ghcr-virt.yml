@@ -1,4 +1,4 @@
-name: Deploy to GHCR
+name: Deploy virt to GHCR
 
 on:
   push:

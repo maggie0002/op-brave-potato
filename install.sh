@@ -18,4 +18,5 @@ echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale
 sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 
 # Run the virtual machine
-sudo docker run -d --restart always --device=/dev/kvm --cap-add=net_admin --network host ghcr.io/maggie0002/op-brave-potato:latest
+wget https://raw.githubusercontent.com/maggie0002/op-brave-potato/main/docker-compose.yml
+docker compose up -d

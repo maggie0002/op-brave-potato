@@ -24,10 +24,10 @@ MEM=512M
 
 At the moment only one instance can be running at a time. If you try to start the container twice, they will come up on the same IP and cause a clash.
 
-Mount the running virtualised OS locally with the following, where `111.111.111.111` is the IP address of your remote host (for example your DigitalOcean Droplet IP):
+Mount the running virtualised OS locally with the following, where `ip.ip.ip.ip` is the IP address of your remote host (for example your DigitalOcean Droplet IP):
 
 ```
-ssh -L 127.0.0.1:22222:10.0.3.101:22222 -L 127.0.0.1:2375:10.0.3.101:2375 -L 127.0.0.1:48484:10.0.3.101:48484 root@111.111.111.111
+ssh -L 22222:10.0.3.101:22222 -L 2375:10.0.3.101:2375 -L 48484:10.0.3.101:48484 root@ip.ip.ip.ip
 ```
 
 You can then use the Balena CLI to interact with the OS by using the local IP address, for example:

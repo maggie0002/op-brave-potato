@@ -25,20 +25,14 @@ WORKDIR /app
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     ca-certificates \
-    dnsmasq \
     ovmf \
     qemu-system-x86 \
-    qemu-utils \
-    socat && \
+    qemu-utils && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=extract-image balena-source.qcow2 .
-COPY dnsmasq.conf .
-COPY entrypoint.sh .
-COPY start.sh .
+COPY virt-start.sh start.sh
 
-RUN chmod +x entrypoint.sh start.sh
-
-ENTRYPOINT [ "/app/entrypoint.sh" ]
+RUN chmod +x start.sh
 
 CMD ["/app/start.sh"]

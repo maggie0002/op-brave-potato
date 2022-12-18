@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
 # Setup SWAP memory
 sudo fallocate -l 500M /swapfile
@@ -25,4 +24,4 @@ echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale
 sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 
 # Run the virtual machine
-exec sudo docker run -d --restart always --device=/dev/kvm --cap-add=net_admin --network host ghcr.io/maggie0002/op-brave-potato:latest
+sudo docker run -d --restart always --device=/dev/kvm --cap-add=net_admin --network host ghcr.io/maggie0002/op-brave-potato:latest

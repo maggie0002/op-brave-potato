@@ -27,9 +27,9 @@ At the moment only one instance can be running at a time. If you try to start th
 Mount the running virtualised OS locally with the following, where `ip.ip.ip.ip` is the IP address of your remote host (for example your DigitalOcean Droplet IP):
 
 ```
-ssh -L 22222:10.0.3.10:22222 \
-    -L 2375:10.0.3.10:2375 \
-    -L 48484:10.0.3.10:48484 \
+ssh -L 22222:10.0.3.101:22222 \
+    -L 2375:10.0.3.101:2375 \
+    -L 48484:10.0.3.101:48484 \
     root@ip.ip.ip.ip
 ```
 
@@ -43,12 +43,13 @@ balena push 127.0.0.1
 Other ports can me mapped locally, for example to interact with services on the device:
 
 ```
-ssh -L 80:10.0.3.10:80 \
+ssh -L 80:10.0.3.101:80 \
     root@ip.ip.ip.ip
 ```
 
 ## Install script
 
 ```
-sudo -v ; curl https://raw.githubusercontent.com/maggie0002/op-brave-potato/main/install.sh | sudo source
+curl -fsSL https://raw.githubusercontent.com/maggie0002/op-brave-potato/main/install.sh -o install.sh
+source install.sh
 ```

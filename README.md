@@ -27,7 +27,7 @@ At the moment only one instance can be running at a time. If you try to start th
 Mount the running virtualised OS locally with the following, where `ip.ip.ip.ip` is the IP address of your remote host (for example your DigitalOcean Droplet IP):
 
 ```
-ssh -L 22222:10.0.3.101:22222 -L 2375:10.0.3.101:2375 -L 48484:10.0.3.101:48484 root@ip.ip.ip.ip
+ssh -L 22222:10.0.3.10:22222 -L 2375:10.0.3.10:2375 -L 48484:10.0.3.10:48484 root@ip.ip.ip.ip
 ```
 
 You can then use the Balena CLI to interact with the OS by using the local IP address, for example:
@@ -40,7 +40,7 @@ balena push 127.0.0.1
 Other ports can me mapped locally, for example to interact with services on the device:
 
 ```
-ssh -L 127.0.0.1:80:10.0.3.101:80 root@111.111.111.111
+ssh -L 80:10.0.3.10:80 root@111.111.111.111
 ```
 
 ## Install script

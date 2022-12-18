@@ -50,6 +50,5 @@ ssh -L 80:10.0.3.10:80 \
 ## Install script
 
 ```
-curl -fsSL https://raw.githubusercontent.com/maggie0002/op-brave-potato/main/install.sh -o install.sh
-source install.sh
+curl -fsSL https://raw.githubusercontent.com/maggie0002/op-brave-potato/main/install.sh | sudo sh
 ```

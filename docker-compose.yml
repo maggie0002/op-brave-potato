@@ -7,8 +7,7 @@ services:
       - net_admin
     devices:
       - /dev/kvm
-    networks:
-      - host
+    network_mode: host
     restart: always
 
   balena-virt:
@@ -17,6 +16,5 @@ services:
       - net_admin
     devices:
       - /dev/kvm
-    networks:
-      - host
+    network_mode: host
     restart: always

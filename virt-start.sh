@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PID_FILE="/app/pid/first.pid"
 RANDOM_PORT=$((RANDOM % 9999))
 
 # Check for hardware acceleration
@@ -33,7 +34,19 @@ fi
 
 echo "Starting BalenaVirt Machine..."
 
-# Start
+# If this is the first device started, use a MAC address to set a default IP
+if ! test -f "$PID_FILE"; then
+    NET_NIC="-net nic,model=virtio,macaddr=52:54:00:b9:57:b8"
+    DEVICE_N0="-device virtio-net-pci,netdev=n0,mac=52:54:00:b9:57:b8"
+    DEVICE_VLAN="-device virtio-net-pci,netdev=vlan,mac=52:54:00:b9:57:b8"
+    touch "$PID_FILE"
+else 
+    NET_NIC="-net nic,model=virtio"
+    DEVICE_N0="-device virtio-net-pci,netdev=n0"
+    DEVICE_VLAN="-device virtio-net-pci,netdev=vlan"
+fi
+
+# Start the VM
 exec qemu-system-x86_64 \
     -nographic \
     -machine q35 \
@@ -44,9 +57,9 @@ exec qemu-system-x86_64 \
     -bios "/usr/share/ovmf/OVMF.fd" \
     -drive if=pflash,format=raw,unit=0,file=/usr/share/OVMF/OVMF_CODE.fd \
     -drive if=virtio,format=qcow2,unit=0,file=balena.qcow2 \
-    -net nic,model=virtio,macaddr=52:54:00:b9:57:b8 \
+    $NET_NIC \
     -net user \
     -netdev user,id=n0,hostfwd=tcp::1$RANDOM_PORT-:22,hostfwd=tcp::2$RANDOM_PORT-:2375 \
     -netdev socket,id=vlan,mcast=230.0.0.1:1234 \
-    -device virtio-net-pci,netdev=n0,mac=52:54:00:b9:57:b8 \
-    -device virtio-net-pci,netdev=vlan,mac=52:54:00:b9:57:b8
+    $DEVICE_N0 \
+    $DEVICE_VLAN

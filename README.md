@@ -5,7 +5,9 @@ Clone then build and start with:
 ```
 docker build -t bp .
 
-docker run -it --restart always --device=/dev/kvm --cap-add=net_admin --network host bp
+docker run -it --restart always -v bv_pid:/app/pid --device=/dev/kvm --cap-add=net_admin --network host ghcr.io/maggie0002/balena-virt:latest
+
+docker run -it --restart always -v bv_pid:/app/pid --device=/dev/kvm --cap-add=net_admin --network host t1
 ```
 
 Default cores, disk size and memory will mirror the system that it is running on (using available memory to avoid out of memory errors). Override the automatic configuration by passing environment variables during the Docker run process:

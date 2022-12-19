@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+COMPOSE_URL="https://raw.githubusercontent.com/maggie0002/op-brave-potato/main/docker-compose.yml"
+
 # Setup SWAP memory
 sudo fallocate -l 500M /swapfile
 sudo chmod 600 /swapfile
@@ -17,7 +19,7 @@ echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale
 sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 
 # Run the virtual machine
-wget https://raw.githubusercontent.com/maggie0002/op-brave-potato/main/docker-compose.yml
+wget "$COMPOSE_URL" -O docker-compose.yml
 docker compose up -d
 
-# Use `tailscale up --advertise-routes=10.0.3.0/24 --accept-routes` to enable subnets
+# Use `tailscale up --advertise-routes=10.0.3.0/24 --accept-routes` to enable Tailscale and subnets

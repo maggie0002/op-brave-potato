@@ -1,5 +1,13 @@
 A temporary repo as part of ongoing development. Tested on a Digital Ocean droplet (Docker will need installing on your droplet).
 
+Sign up for Digital Ocean. Using the button below you will get $200 of free credit for 60 days; plenty to run a powerful virtual device:
+
+<a href="https://www.digitalocean.com/?refcode=c1582aebbcdf&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" /></a>
+
+You will see a banner at the top of the page indicating that the credit is active and you can continue to the sign up page:
+
+`Free credit active: Get started on DigitalOcean with a $200, 60-day credit for new users.`
+
 Start from pre-built:
 
 ```
